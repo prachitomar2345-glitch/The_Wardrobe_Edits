@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Wardrobe Edits — Delhi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f5ead9; --cream-light:#faf3e7; --brown-dark:#4a3728; --brown-med:#5c4433;
+  --brown-text:#6b513d; --tan:#d9c1a8; --tan-light:#f0e0c8; --blush:#e6cdb8;
+  --accent:#a8705f; --line:#c9a780;
+}
+*{box-sizing:border-box;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+body{
+  margin:0; font-family:'Jost',sans-serif; background:var(--cream); color:var(--brown-text);
+  line-height:1.6; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --cream:#f5ead9; --cream-light:#faf3e7; }
+}
+h1,h2,h3{font-family:'Playfair Display',serif; color:var(--brown-dark); margin:0 0 .4em;}
+a{color:inherit;text-decoration:none;}
+button{font-family:'Jost',sans-serif;}
+
+.floral-corner{position:fixed;width:120px;height:120px;pointer-events:none;opacity:.5;z-index:0;}
+.floral-corner svg{width:100%;height:100%;stroke:#3a2a1d;fill:none;}
+.floral-tl{top:env(safe-area-inset-top,0px);left:0;}
+.floral-tr{top:env(safe-area-inset-top,0px);right:0;transform:scaleX(-1);}
+.floral-bl{bottom:env(safe-area-inset-bottom,0px);left:0;transform:scaleY(-1);}
+.floral-br{bottom:env(safe-area-inset-bottom,0px);right:0;transform:scale(-1,-1);}
+nav,main,footer{position:relative;z-index:1;}
+
+nav{background:var(--brown-med);display:flex;align-items:center;justify-content:center;gap:1.8rem;padding:1rem;flex-wrap:wrap;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;}
+nav button.nav-link{background:none;border:none;color:var(--cream-light);font-size:.92rem;cursor:pointer;padding:0;}
+nav button.nav-link.active{color:var(--tan);}
+.nav-cart{display:flex;align-items:center;gap:.3rem;cursor:pointer;background:none;border:none;color:var(--cream-light);font-size:.92rem;}
+.nav-cart svg{width:17px;height:17px;}
+.cart-count{background:var(--accent);color:#fff;font-size:.7rem;padding:1px 6px;border-radius:999px;}
+
+.hero{background:var(--blush);text-align:center;padding:4.5rem 1.2rem 4rem;}
+.hero h1{font-size:2.6rem;}
+section.view{padding:3rem 1.2rem;max-width:1080px;margin:0 auto;display:none;overflow-x:auto;}
+section.view.active{display:block;}
+.section-title{text-align:center;margin-bottom:.5rem;}
+.section-sub{text-align:center;max-width:600px;margin:0 auto 2rem;}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem;}
+.card{background:#fff;border-radius:4px;overflow:hidden;box-shadow:0 2px 10px rgba(74,55,40,.08);display:flex;flex-direction:column;}
+.swatch{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;}
+.swatch svg{width:52%;height:52%;}
+.card-body{padding:1rem 1.1rem 1.3rem;text-align:center;}
+.card-body h3{font-size:1.02rem;margin-bottom:.2rem;}
+.price{color:var(--accent);font-weight:600;margin:.3rem 0 .7rem;}
+.feature-card{background:var(--tan);border-radius:6px;padding:1.6rem 1.2rem;text-align:center;}
+
+.btn{display:inline-block;background:var(--brown-med);color:#fff;border:none;padding:.6rem 1.3rem;border-radius:3px;font-size:.9rem;cursor:pointer;}
+.btn:hover{background:var(--brown-dark);}
+.btn-outline{background:transparent;border:1px solid var(--brown-med);color:var(--brown-med);}
+.btn-outline:hover{background:var(--brown-med);color:#fff;}
+.btn-full{width:100%;}
+select.opt{width:100%;padding:.4rem;margin-bottom:.6rem;border:1px solid var(--line);border-radius:3px;background:var(--cream-light);color:var(--brown-text);}
+
+.form-card{background:#fff;max-width:400px;margin:1rem auto;padding:2.2rem 1.8rem;border-radius:6px;box-shadow:0 4px 18px rgba(74,55,40,.1);text-align:center;}
+.form-card input,.form-card textarea{width:100%;padding:.6rem .75rem;margin-bottom:1rem;border:1px solid var(--line);border-radius:3px;font-family:'Jost',sans-serif;font-size:.93rem;}
+.form-card textarea{resize:vertical;min-height:90px;}
+.checkbox-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;margin-bottom:1.1rem;text-align:left;}
+.form-actions{display:flex;gap:.6rem;justify-content:center;}
+
+footer{background:var(--brown-dark);color:var(--cream-light);text-align:center;padding:2rem 1rem;}
+.social-links{display:flex;justify-content:center;gap:1rem;margin-bottom:.8rem;}
+.social-links a{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1px solid var(--tan);border-radius:50%;}
+.social-links svg{width:16px;height:16px;fill:var(--cream-light);}
+footer small{opacity:.75;font-size:.76rem;}
+
+.cart-overlay{position:fixed;inset:0;background:rgba(40,28,18,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:20;}
+.cart-overlay.open{opacity:1;pointer-events:auto;}
+.cart-drawer{position:fixed;top:0;right:-340px;width:320px;max-width:88vw;height:100%;background:var(--cream-light);box-shadow:-4px 0 20px rgba(0,0,0,.15);z-index:21;transition:right .25s;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+.cart-drawer.open{right:0;}
+.cart-head{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.1rem;border-bottom:1px solid var(--line);}
+.cart-head button{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--brown-dark);}
+.cart-items{flex:1;overflow-y:auto;padding:.9rem 1.1rem;}
+.cart-item{display:flex;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--tan-light);font-size:.85rem;align-items:center;}
+.cart-item .sw{width:40px;height:50px;border-radius:3px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.cart-item .sw svg{width:60%;height:60%;}
+.cart-item-info{flex:1;}
+.cart-item-remove{background:none;border:none;color:var(--accent);cursor:pointer;font-size:1.05rem;}
+.cart-foot{padding:1rem 1.1rem;border-top:1px solid var(--line);}
+.cart-total{display:flex;justify-content:space-between;margin-bottom:.7rem;font-weight:600;color:var(--brown-dark);}
+.cart-empty{text-align:center;opacity:.7;padding:1.6rem 0;font-size:.88rem;}
+@media(max-width:640px){nav{gap:1rem;} .hero h1{font-size:2rem;} .floral-corner{width:80px;height:80px;}}
+</style>
+</head>
+<body>
+
+<div class="floral-corner floral-tl" aria-hidden="true"><svg viewBox="0 0 150 150"><path d="M8 142C20 110 15 70 35 40" stroke-width="1.6" stroke-linecap="round"/><g transform="translate(40,34)"><ellipse cx="0" cy="-12" rx="7" ry="12" stroke-width="1.3"/><ellipse cx="11" cy="-6" rx="7" ry="12" stroke-width="1.3" transform="rotate(72 11 -6)"/><ellipse cx="7" cy="8" rx="7" ry="12" stroke-width="1.3" transform="rotate(144 7 8)"/><ellipse cx="-7" cy="8" rx="7" ry="12" stroke-width="1.3" transform="rotate(216 -7 8)"/><ellipse cx="-11" cy="-6" rx="7" ry="12" stroke-width="1.3" transform="rotate(288 -11 -6)"/><circle r="4.5" stroke-width="1.3"/></g></svg></div>
+<div class="floral-corner floral-tr" aria-hidden="true"><svg viewBox="0 0 150 150"><path d="M8 142C20 110 15 70 35 40" stroke-width="1.6" stroke-linecap="round"/><g transform="translate(40,34)"><ellipse cx="0" cy="-12" rx="7" ry="12" stroke-width="1.3"/><ellipse cx="11" cy="-6" rx="7" ry="12" stroke-width="1.3" transform="rotate(72 11 -6)"/><ellipse cx="7" cy="8" rx="7" ry="12" stroke-width="1.3" transform="rotate(144 7 8)"/><ellipse cx="-7" cy="8" rx="7" ry="12" stroke-width="1.3" transform="rotate(216 -7 8)"/><ellipse cx="-11" cy="-6" rx="7" ry="12" stroke-width="1.3" transform="rotate(288 -11 -6)"/><circle r="4.5" stroke-width="1.3"/></g></svg></div>
+<div class="floral-corner floral-bl" aria-hidden="true"><svg viewBox="0 0 150 150"><path d="M8 142C20 110 15 70 35 40" stroke-width="1.6" stroke-linecap="round"/><g transform="translate(40,34)"><ellipse cx="0" cy="-12" rx="7" ry="12" stroke-width="1.3"/><ellipse cx="11" cy="-6" rx="7" ry="12" stroke-width="1.3" transform="rotate(72 11 -6)"/><ellipse cx="7" cy="8" rx="7" ry="12" stroke-width="1.3" transform="rotate(144 7 8)"/><ellipse cx="-7" cy="8" rx="7" ry="12" stroke-width="1.3" transform="rotate(216 -7 8)"/><ellipse cx="-11" cy="-6" rx="7" ry="12" stroke-width="1.3" transform="rotate(288 -11 -6)"/><circle r="4.5" stroke-width="1.3"/></g></svg></div>
+<div class="floral-corner floral-br" aria-hidden="true"><svg viewBox="0 0 150 150"><path d="M8 142C20 110 15 70 35 40" stroke-width="1.6" stroke-linecap="round"/><g transform="translate(40,34)"><ellipse cx="0" cy="-12" rx="7" ry="12" stroke-width="1.3"/><ellipse cx="11" cy="-6" rx="7" ry="12" stroke-width="1.3" transform="rotate(72 11 -6)"/><ellipse cx="7" cy="8" rx="7" ry="12" stroke-width="1.3" transform="rotate(144 7 8)"/><ellipse cx="-7" cy="8" rx="7" ry="12" stroke-width="1.3" transform="rotate(216 -7 8)"/><ellipse cx="-11" cy="-6" rx="7" ry="12" stroke-width="1.3" transform="rotate(288 -11 -6)"/><circle r="4.5" stroke-width="1.3"/></g></svg></div>
+
+<nav>
+  <button class="nav-link active" data-view="home">Home</button>
+  <button class="nav-link" data-view="collection">Collection</button>
+  <button class="nav-link" data-view="login">Login</button>
+  <button class="nav-link" data-view="signin">Sign In</button>
+  <button class="nav-link" data-view="contact">Contact Us</button>
+  <button class="nav-link" data-view="about">About Us</button>
+  <button class="nav-cart" id="cartToggle" aria-label="Open cart">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.6a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+    Bag <span class="cart-count">0</span>
+  </button>
+</nav>
+
+<main>
+  <!-- HOME -->
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <h1>The Wardrobe Edits</h1>
+      <p>Where timeless style meets modern fashion. &middot; Delhi</p>
+    </div>
+    <div style="max-width:1080px;margin:0 auto;padding:3rem 1.2rem 0;">
+      <h2 class="section-title">Our Collection</h2>
+      <p class="section-sub">The Wardrobe Edits is a Delhi-based fashion label for those who love effortless, elegant and modern clothing — dresses, corsets, ethnic wear and everyday tops, carefully chosen.</p>
+      <h3 style="text-align:center;margin-bottom:1.4rem;">Featured Modest Dresses</h3>
+      <div class="grid" id="home-products"></div>
+      <div style="text-align:center;margin:2rem 0;"><button class="btn btn-outline" data-view="collection">View Full Collection</button></div>
+    </div>
+    <div style="background:var(--cream-light);border-radius:8px;max-width:1080px;margin:0 auto;padding:2.5rem 1.2rem;">
+      <h2 class="section-title">Why You Should Choose Us</h2>
+      <p class="section-sub">Fashion should be stylish, comfortable and accessible — every piece is chosen for quality, versatility and confidence.</p>
+      <div class="grid">
+        <div class="feature-card"><h3>Quality</h3><p>Comfortable and carefully selected clothing.</p></div>
+        <div class="feature-card"><h3>Unique Style</h3><p>Pieces that help you create your own style.</p></div>
+        <div class="feature-card"><h3>Affordable</h3><p>Fashion that looks beautiful without being overpriced.</p></div>
+        <div class="feature-card"><h3>Versatile</h3><p>Styles for everyday looks and special occasions.</p></div>
+        <div class="feature-card"><h3>Made For You</h3><p>Fashion designed around modern wardrobes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section class="view" id="view-collection">
+    <h2 class="section-title">Dresses &amp; More</h2>
+    <p class="section-sub">Pick a size and add your favourites to the bag.</p>
+    <div class="grid" id="full-products"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="view" id="view-about">
+    <div class="form-card" style="max-width:580px;">
+      <h2>About Us</h2>
+      <p>Welcome to The Wardrobe Edits, based in Delhi, where style meets confidence. We bring you trendy and elegant clothing designed for every mood and occasion.</p>
+      <p>From dresses and corsets to ethnic wear and tops, we believe fashion should be simple, stylish and uniquely you.</p>
+      <p>Contact: XXXXXXXXXX1234 &middot; Delhi, India</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="view" id="view-contact">
+    <div class="form-card">
+      <h2>Contact Us</h2>
+      <p style="font-size:.88rem;margin-top:-.3rem;">Based in Delhi — questions about an order or a collab? Send us a note.</p>
+      <input type="text" placeholder="Your name">
+      <input type="email" placeholder="Your email">
+      <textarea placeholder="Your message"></textarea>
+      <div class="form-actions"><button class="btn" onclick="alert('Demo form — no message was actually sent.')">Send Message</button></div>
+    </div>
+  </section>
+
+  <!-- LOGIN -->
+  <section class="view" id="view-login">
+    <div class="form-card">
+      <h2>Welcome to The Wardrobe Edits</h2>
+      <p style="font-size:.88rem;margin-top:-.3rem;">Register with us to start shopping.</p>
+      <input type="text" placeholder="Enter your name">
+      <input type="tel" placeholder="Enter your mobile number">
+      <input type="email" placeholder="Enter your email address">
+      <div class="checkbox-row"><input type="checkbox" id="updates"><label for="updates">I would like to receive updates from this website</label></div>
+      <div class="form-actions">
+        <button class="btn" onclick="alert('Demo form — no account was actually created.')">Submit</button>
+        <button class="btn btn-outline" type="button" onclick="this.closest('.form-card').querySelectorAll('input').forEach(i=>i.type==='checkbox'?i.checked=false:i.value='')">Cancel</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGN IN -->
+  <section class="view" id="view-signin">
+    <div class="form-card">
+      <h2>Sign In</h2>
+      <input type="tel" placeholder="Enter registered mobile number">
+      <button class="btn btn-outline btn-full" style="margin-bottom:1rem;" onclick="alert('Demo — an OTP would be sent here.')">Send OTP</button>
+      <input type="text" placeholder="Enter OTP sent here">
+      <input type="email" placeholder="Enter your email">
+      <div class="form-actions"><button class="btn btn-full" onclick="alert('Demo form — this does not sign you in to a real account.')">Sign In</button></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="social-links">
+    <a href="https://instagram.com/thewardrobeedits.delhi" target="_blank" rel="noopener" aria-label="Instagram (demo link)"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.43.4a4.9 4.9 0 0 1 1.77 1.15 4.9 4.9 0 0 1 1.15 1.77c.16.46.35 1.26.4 2.43.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.4 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.46.16-1.26.35-2.43.4-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.43-.4a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.16-.46-.35-1.26-.4-2.43C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.24-1.97.4-2.43A4.9 4.9 0 0 1 3.82 3 4.9 4.9 0 0 1 5.59 1.9c.46-.16 1.26-.35 2.43-.4C9.29 1.44 9.67 1.43 12 1.43zm0 3.35a5.45 5.45 0 1 0 0 10.9 5.45 5.45 0 0 0 0-10.9zm0 1.98a3.47 3.47 0 1 1 0 6.94 3.47 3.47 0 0 1 0-6.94zm5.66-2.2a1.27 1.27 0 1 1 0 2.55 1.27 1.27 0 0 1 0-2.55z"/></svg></a>
+    <a href="https://youtube.com/@TheWardrobeEditsDelhi" target="_blank" rel="noopener" aria-label="YouTube (demo link)"><svg viewBox="0 0 24 24"><path d="M23.5 7.2a3 3 0 0 0-2.1-2.1C19.5 4.6 12 4.6 12 4.6s-7.5 0-9.4.5A3 3 0 0 0 .5 7.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-4.8zM9.6 15.4V8.6L15.8 12l-6.2 3.4z"/></svg></a>
+  </div>
+  <p style="margin:0 0 .3rem;">@thewardrobeedits.delhi &nbsp;&middot;&nbsp; The Wardrobe Edits &nbsp;&middot;&nbsp; Delhi</p>
+  <small>&copy; 2026 The Wardrobe Edits | All Rights Reserved &mdash; demo project, not a live store</small>
+</footer>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head"><h3 style="margin:0;font-size:1.05rem;">Your Bag</h3><button id="cartClose" aria-label="Close">&times;</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>Total</span><span id="cartTotalAmt">₹0</span></div>
+    <button class="btn btn-full" id="checkoutBtn">Checkout</button>
+  </div>
+</div>
+
+<script>
+const PRODUCTS = [
+  {name:"Classic Midi Dress", price:1999, color:"#b23a3a", desc:"Flowing midi length in rich red, perfect for evening occasions."},
+  {name:"Elegant Evening Dress", price:2299, color:"#5e2a4d", desc:"Off-shoulder silhouette in deep plum, tailored for a refined look."},
+  {name:"Timeless Maxi Dress", price:2499, color:"#5b7a92", desc:"Denim-style maxi, effortless for everyday wear."},
+  {name:"Sun Floral Dress", price:1799, color:"#c98a3f", desc:"Light floral print, breathable fabric for warm days."},
+  {name:"Ivory Lace Dress", price:2799, color:"#d8c7a8", desc:"Delicate lace overlay, soft ivory tone for daytime events."},
+  {name:"Emerald Wrap Dress", price:2199, color:"#2f6b4f", desc:"Flattering wrap cut in emerald green, easy to style."},
+  {name:"Corset Top", price:1499, color:"#7a3b3b", desc:"Structured corset top, pairs well with skirts or denim."},
+  {name:"Ethnic Anarkali Set", price:2999, color:"#a8622f", desc:"Traditional silhouette with modern detailing for festive days."}
+];
+const dressSVG = (c)=>`<svg viewBox="0 0 100 100"><path d="M40 10 L35 30 L20 90 L80 90 L65 30 L60 10 Z" fill="${c}" opacity="0.85"/><path d="M40 10 Q50 20 60 10" fill="none" stroke="${c}" stroke-width="2"/></svg>`;
+
+function productCard(p, idx, prefix){
+  const id = prefix+'-size-'+idx;
+  return `<div class="card">
+    <div class="swatch" style="background:${p.color}22;">${dressSVG(p.color)}</div>
+    <div class="card-body">
+      <h3>${p.name}</h3>
+      <p style="font-size:.82rem;opacity:.75;margin:.2rem 0 .6rem;">${p.desc}</p>
+      <div class="price">₹${p.price.toLocaleString('en-IN')}</div>
+      <select class="opt" id="${id}">
+        <option value="S">Size: S</option><option value="M" selected>Size: M</option>
+        <option value="L">Size: L</option><option value="XL">Size: XL</option>
+      </select>
+      <button class="btn btn-full" onclick="addToCart(${idx}, document.getElementById('${id}').value)">Add to Cart</button>
+    </div>
+  </div>`;
+}
+document.getElementById('home-products').innerHTML = PRODUCTS.slice(0,3).map((p,i)=>productCard(p,i,'home')).join('');
+document.getElementById('full-products').innerHTML = PRODUCTS.map((p,i)=>productCard(p,i,'full')).join('');
+
+// ---- view switching ----
+document.querySelectorAll('[data-view]').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    const v = el.dataset.view;
+    document.querySelectorAll('.view').forEach(s=>s.classList.remove('active'));
+    document.getElementById('view-'+v).classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(n=>n.classList.toggle('active', n.dataset.view===v));
+    window.scrollTo({top:0});
+  });
+});
+
+// ---- cart ----
+const CART_KEY='twe_cart';
+function getCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY))||[];}catch(e){return [];} }
+function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); renderCount(); }
+function addToCart(idx, size){
+  const p = PRODUCTS[idx];
+  const cart = getCart();
+  const existing = cart.find(c=>c.name===p.name && c.size===size);
+  if(existing){ existing.qty++; } else { cart.push({name:p.name, price:p.price, color:p.color, size, qty:1}); }
+  saveCart(cart); openCart();
+}
+function removeItem(i){ const c=getCart(); c.splice(i,1); saveCart(c); renderCart(); }
+function renderCount(){
+  const n = getCart().reduce((s,i)=>s+i.qty,0);
+  document.querySelectorAll('.cart-count').forEach(e=>e.textContent=n);
+}
+function renderCart(){
+  const cart = getCart();
+  const wrap = document.getElementById('cartItems');
+  wrap.innerHTML = cart.length===0 ? '<p class="cart-empty">Your bag is empty.</p>' :
+    cart.map((i,idx)=>`<div class="cart-item">
+      <div class="sw" style="background:${i.color}22;">${dressSVG(i.color)}</div>
+      <div class="cart-item-info"><div>${i.name}</div><div style="opacity:.65;">Size ${i.size} &middot; Qty ${i.qty}</div><div>₹${(i.price*i.qty).toLocaleString('en-IN')}</div></div>
+      <button class="cart-item-remove" onclick="removeItem(${idx})">&times;</button>
+    </div>`).join('');
+  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById('cartTotalAmt').textContent = '₹'+total.toLocaleString('en-IN');
+}
+function openCart(){ document.getElementById('cartDrawer').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); renderCart(); }
+function closeCart(){ document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); }
+document.getElementById('cartToggle').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+document.getElementById('cartOverlay').addEventListener('click', closeCart);
+document.getElementById('checkoutBtn').addEventListener('click', ()=>{
+  if(getCart().length===0){ alert('Your bag is empty.'); return; }
+  alert("This is a class-project demo — there's no real payment here.");
+});
+renderCount();
+</script>
+</body>
+</html>
